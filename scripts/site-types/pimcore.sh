@@ -46,7 +46,7 @@ block="# mime types are covered in nginx.conf by:
 #   include       mime.types;
 # }
 
-upstream php-pimcore5-$1 {
+upstream php-pimcore5 {
     server unix:/var/run/php/php$5-fpm.sock;
 }
 
@@ -151,7 +151,7 @@ server {
         # fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;
         # fastcgi_param DOCUMENT_ROOT \$realpath_root;
 
-        fastcgi_pass php-pimcore5-$1;
+        fastcgi_pass php-pimcore5;
         # Prevents URIs that include the front controller. This will 404:
         # http://domain.tld/app.php/some-path
         # Remove the internal directive to allow URIs like this
@@ -166,10 +166,10 @@ server {
             allow 127.0.0.1;
             # add additional IP's or Ranges
             deny all;
-            fastcgi_pass php-pimcore5-$1;
+            fastcgi_pass php-pimcore5;
         }
         location /fpm-ping {
-            fastcgi_pass php-pimcore5-$1;
+            fastcgi_pass php-pimcore5;
         }
     }
     # nginx Status
